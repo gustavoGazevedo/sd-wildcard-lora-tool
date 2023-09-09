@@ -4,12 +4,12 @@ from itertools import combinations
 
 def get_combinations(trained_word):
     combinations_list = []
-    min = config_data["minimumNumberOfCombinations"]
+    max_combinations = config_data["maximumNumberOfCombinations"]
     rang = len(trained_word) + 1
-    if min != 0:
-        rang = min + 1
+    if max_combinations != 0:
+        rang = min(len(trained_word) + 1, max_combinations + 1)
     for r in range(1, rang):
-        comb = combinations(trained_word , r)
+        comb = combinations(trained_word, r)
         combinations_list.extend([", ".join(c) for c in comb])
     return combinations_list
 
