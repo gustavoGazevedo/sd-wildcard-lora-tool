@@ -1,0 +1,21 @@
+how to use:
+
+Install the following Extensions:
+ - Stable Diffusion Dynamic Prompts (https://github.com/adieyal/sd-dynamic-prompts)
+ - Civitai Helper (https://github.com/butaixianran/Stable-Diffusion-Webui-Civitai-Helper)
+
+Start automatic1111
+Go to extension tab "Civitai Helper". There is a button called "Scan model".
+In model types select lora and click "scan" (this will download preview images for your loras and a .info file that will contain the trigger words)
+
+After this is finished, go to the config.json file, add to the whitelist the path to your lora folder, and to the blacklist what folders to ignore.
+
+Run run.bat, and then copy the generated files to "/path/to/stable-diffusion-webui/extensions/sd-dynamic-prompts/wildcard"
+
+other configs:
+
+subfolders: if true, will search all subfolders.
+createWildcardForSubfolders: if true will create a separate wildcard for each subfolder
+WildcardName: the name of the wildcard txt file, subfolders will be named after their folder name
+minimumNumberOfCombinations: set to zero to get all possible trigger word variations,
+weights: what weights are supposed to be used in the loras, will create minimumNumberOfCombinations x number of weights

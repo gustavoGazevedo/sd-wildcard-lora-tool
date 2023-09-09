@@ -1,0 +1,22 @@
+{
+    "whitelist": [
+        "C:\\Projects\\stable-diffusion-webui\\models\\lora",
+        "C:\\Projects\\stable-diffusion-webui\\models\\LyCORIS"
+    ],
+    "blacklist": [
+        "C:\\Projects\\stable-diffusion-webui\\models\\LyCORIS\\xl",
+        "C:\\Projects\\stable-diffusion-webui\\models\\lora\\xl"
+    ],
+    "subfolders": true,
+    "createWildcardForSubfolders": true,
+    "WildcardName": "all",
+    "minimumNumberOfCombinations": 0,
+    "weights": [
+        "1",
+        "0.5",
+        "0.6",
+        "0.7",
+        "0.8",
+        "0.9"
+    ]
+}
