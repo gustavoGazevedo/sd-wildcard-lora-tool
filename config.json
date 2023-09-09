@@ -9,8 +9,8 @@
     ],
     "subfolders": true,
     "createWildcardForSubfolders": true,
-    "WildcardName": "all_min2",
-    "maximumNumberOfCombinations": 2,
+    "WildcardName": "all",
+    "maximumNumberOfCombinations": 0,
     "weights": [
         "1",
         "0.5",

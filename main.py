@@ -61,9 +61,20 @@ def scan_folders(whitelist, blacklist, subfolders):
 
     return results
 
+def create_folder_if_not_exists(folder_path):
+    if not os.path.exists(folder_path):
+        try:
+            os.makedirs(folder_path)
+        except OSError as e:
+            print(f"Error: {e}")
 
-# def replace_unicode_comma(input_string):
-#     return input_string.replace('\uff0c', ', ')
+def genLoraWild(item):
+    folder_path = "wildcards/loras_triggers/" + item["folder"]
+    create_folder_if_not_exists(folder_path)
+    filename = folder_path + "/" + item['name'] + ".txt"
+    with open(filename, 'w', encoding='utf-8') as output_file:
+        for line in item["trained_words"]:
+            output_file.write(line + "\n")
 
 # Load the configuration data from the JSON file
 config_file_path = 'config.json'
@@ -85,25 +96,22 @@ subfolders = config_data["subfolders"]
 # Scan the folders and collect the results
 results = scan_folders(whitelist, blacklist, subfolders)
 
-counter = 0
-
 output_file_path = "wildcards/" + config_data["WildcardName"] + ".txt"
+
+create_folder_if_not_exists("wildcards")
 
 with open(output_file_path, 'w', encoding='utf-8') as output_file:
     for item in results:
-        # print(item)
+        genLoraWild(item)
+        weight = "{" + "|".join(config_data["weights"]) + "}"
+        output_line = f"<lora:{item['name']}:{weight}>"
+        output_file.write(output_line + "\n")
 
-        for weight in config_data["weights"]:
-            output_line = f"<lora:{item['name']}:{weight}>"
-            counter += 1
-            output_file.write(output_line + "\n")
+        # Write trained words for this name and weight combination
+        line = f"__**/loras_triggers/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
+        output_file.write(line + "\n")
 
-            # Write trained words for this name and weight combination
-            for trained_word in item["trained_words"]:
-                # print(trained_word)
-                line = f"{trained_word}, <lora:{item['name']}:{weight}>"
-                output_file.write(line + "\n")
-                counter += 1
+
 
 if config_data["createWildcardForSubfolders"]:
     items_by_folder = {}
@@ -122,14 +130,11 @@ if config_data["createWildcardForSubfolders"]:
 
             with open(folder_file_name, "w", encoding='utf-8') as output_file:
                 for item in items:
-                    for weight in config_data["weights"]:
-                        output_line = f"<lora:{item['name']}:{weight}>"
-                        output_file.write(output_line + "\n")
+                    weight = "{" + "|".join(config_data["weights"]) + "}"
+                    output_line = f"<lora:{item['name']}:{weight}>"
+                    output_file.write(output_line + "\n")
 
-                        # Write trained words for this name and weight combination
-                        for trained_word in item["trained_words"]:
-                            # print(trained_word)
-                            line = f"{trained_word}, <lora:{item['name']}:{weight}>"
-                            output_file.write(line + "\n")
-
-print(f"Number of wildcards: {counter}")
+                    # Write trained words for this name and weight combination
+                    line = f"__**/loras_triggers/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
+                    output_file.write(line + "\n")
+                        
