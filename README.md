@@ -24,6 +24,7 @@ Script to generate wildcards based on your loras.
 
 - **subfolders:** If set to true, it will search all subfolders.
 - **createWildcardForSubfolders:** If set to true, it will create a separate wildcard for each subfolder.
+- **subfolderName:** Name for the subfolder containing the trigger word combinations.
 - **WildcardName:** The name of the wildcard text file. Subfolders will be named after their folder name.
 - **maximumNumberOfCombinations:** Set to zero to get all possible trigger word variations.
 - **weights:** Specify what weights are supposed to be used in the Loras. This will create `maximumNumberOfCombinations` x `number of weights`.

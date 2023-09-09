@@ -69,7 +69,7 @@ def create_folder_if_not_exists(folder_path):
             print(f"Error: {e}")
 
 def genLoraWild(item):
-    folder_path = "wildcards/loras_triggers/" + item["folder"]
+    folder_path = f"wildcards/{config_data['subfolderName']}/" + item["folder"]
     create_folder_if_not_exists(folder_path)
     filename = folder_path + "/" + item['name'] + ".txt"
     with open(filename, 'w', encoding='utf-8') as output_file:
@@ -103,14 +103,13 @@ create_folder_if_not_exists("wildcards")
 with open(output_file_path, 'w', encoding='utf-8') as output_file:
     for item in results:
         genLoraWild(item)
-        weight = "{" + "|".join(config_data["weights"]) + "}"
-        output_line = f"<lora:{item['name']}:{weight}>"
-        output_file.write(output_line + "\n")
-
-        # Write trained words for this name and weight combination
-        line = f"__**/loras_triggers/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
-        output_file.write(line + "\n")
-
+        for weight in config_data["weights"]:
+            output_line = f"<lora:{item['name']}:{weight}>"
+            output_file.write(output_line + "\n")
+            
+            # Write trained words for this name and weight combination
+            line = f"__**/{config_data['subfolderName']}/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
+            output_file.write(line + "\n")
 
 
 if config_data["createWildcardForSubfolders"]:
@@ -130,11 +129,11 @@ if config_data["createWildcardForSubfolders"]:
 
             with open(folder_file_name, "w", encoding='utf-8') as output_file:
                 for item in items:
-                    weight = "{" + "|".join(config_data["weights"]) + "}"
-                    output_line = f"<lora:{item['name']}:{weight}>"
-                    output_file.write(output_line + "\n")
+                    for weight in config_data["weights"]:
+                        output_line = f"<lora:{item['name']}:{weight}>"
+                        output_file.write(output_line + "\n")
 
-                    # Write trained words for this name and weight combination
-                    line = f"__**/loras_triggers/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
-                    output_file.write(line + "\n")
+                        # Write trained words for this name and weight combination
+                        line = f"__**/{config_data['subfolderName']}/{item['folder']}/{item['name']}__, <lora:{item['name']}:{weight}>"
+                        output_file.write(line + "\n")
                         

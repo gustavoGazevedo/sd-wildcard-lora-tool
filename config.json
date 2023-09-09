@@ -9,6 +9,7 @@
     ],
     "subfolders": true,
     "createWildcardForSubfolders": true,
+    "subfolderName": "triggers",
     "WildcardName": "all",
     "maximumNumberOfCombinations": 0,
     "weights": [

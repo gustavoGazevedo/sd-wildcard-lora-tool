@@ -16,6 +16,7 @@ other configs:
 
 subfolders: if true, will search all subfolders.
 createWildcardForSubfolders: if true will create a separate wildcard for each subfolder
+subfolderName: name for the subfolder containing the trigger word combinations
 WildcardName: the name of the wildcard txt file, subfolders will be named after their folder name
 maximumNumberOfCombinations: set to zero to get all possible trigger word variations
 weights: what weights are supposed to be used in the loras, will create maximumNumberOfCombinations x number of weights
